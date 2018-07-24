@@ -1,8 +1,12 @@
 package Tests.by;
 
 import Driver.CreateCloseDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
 
 
 public class YandexGeoLocation extends CreateCloseDriver {
@@ -19,6 +23,8 @@ public class YandexGeoLocation extends CreateCloseDriver {
 
     @Test
     public void parisTest() {
+        String URL = "https://yandex.by";
+        mainPage.navigate(URL);
         mainPage.clickGeoLink();
         mainPage.inputGeoField("Париж");
         mainPage.clickFranceList();
@@ -27,11 +33,19 @@ public class YandexGeoLocation extends CreateCloseDriver {
 
     @Test
     public void compareMoreList() {
-        System.out.println();
+        String URL = "https://yandex.by";
+        mainPage.navigate(URL);
+
+        List<WebElement> londonLists = driver.findElements(By.cssSelector("div[class=\"home-tabs__more-item\"] a"));
+        List<WebElement> parisLists = driver.findElements(By.cssSelector("div[class=\"home-tabs__more-item\"] a"));
+
+        Assert.assertEquals(londonLists, parisLists);
+        for (int i = 0; i < londonLists.size(); i++) {
+        Assert.assertEquals(londonLists.get(i).getText(), parisLists.get(i).getText());
+
+        }
     }
 }
-
-
 
 
 
