@@ -5,6 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainPage {
     public MainPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -12,6 +15,7 @@ public class MainPage {
     }
 
     public WebDriver driver;
+    ArrayList<String> cityLinksMore = new ArrayList<String>();
 
 
     @FindBy(css = "a[data-statlog=\"head.region.setup\"] span")
@@ -26,21 +30,27 @@ public class MainPage {
     @FindBy(css = "a[data-statlog=\"tabs.more\"]")
     private WebElement findMoreLink;
 
+
     @FindBy(css = "li[data-bem*='\"subtitle\":\"Франция\"'] div[class='b-autocomplete-item__reg']")
-    private WebElement findFranceList;
+    private WebElement findParisList;
+
 
     @FindBy(css = "div[class=\"home-tabs__more-item\"] a")
-    private WebElement findMoreLinksLondon;
+    private List<WebElement> moreLinks;
 
-    @FindBy(css = "div[class=\"home-tabs__more-item\"] a")
-    private WebElement findMoreLinksParis;
 
-    public void navigate(String URL) {
-        driver.get(URL);
-        System.out.println("Переход на:" + URL);
+
+    public void navigateLondon(String urlLondon) {
+        driver.get(urlLondon);
+        System.out.println("Переход на:" + urlLondon);
     }
 
-    public void clickGeoLink() {
+    public void navigateParis(String urlParis) {
+        driver.get(urlParis);
+        System.out.println("Переход на:" + urlParis);
+    }
+
+    public void clickGeoLink(String text) {
         GeoLink.click();
     }
 
@@ -53,20 +63,25 @@ public class MainPage {
         findLondonList.click();
     }
 
-    public void clickMoreLink() {
+    public void clickParisList() {
+        findParisList.click();
+    }
+
+    public void clickMoreLink(String text) {
         findMoreLink.click();
     }
 
-    public void clickFranceList() {
-        findFranceList.click();
-    }
 
-    public void clickLondonMoreLink() {
-        findMoreLinksLondon.click();
-    }
+    public ArrayList<String> getCountMoreLinks(String city){
+        System.out.println("Количество ссылок на вкладке 'ещё': "+ city + " = " + moreLinks.size());
 
-    public void clickParisMoreLink() {
-        findMoreLinksParis.click();
-    }
+        if (!cityLinksMore.isEmpty())
+            cityLinksMore.clear();
 
+        for(WebElement e : moreLinks) {
+            System.out.println(e.getText());
+            cityLinksMore.add(e.getText());
+        }
+        return cityLinksMore;
+    }
 }
