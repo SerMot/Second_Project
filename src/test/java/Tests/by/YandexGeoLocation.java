@@ -2,39 +2,45 @@ package Tests.by;
 
 import Driver.CreateCloseDriver;
 
+import Packages.LocationPage;
+import Packages.MainPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
 public class YandexGeoLocation extends CreateCloseDriver {
+
+    public MainPage mainPage;
+    public LocationPage locationPage;
+
+    final String City1 = "Лондон";
+    final String City2 = "Париж";
+    final String URL = "https://yandex.by";
+
     @Test
     public void cityTest() {
+        ArrayList<String> moreLinkCity1;
+        ArrayList<String> moreLinkCity2;
 
-        String urlLondon = "https://yandex.by";
-        mainPage.navigateLondon(urlLondon);
-        mainPage.clickGeoLink("Лондон");
-        mainPage.inputGeoField("Лондон");
-        mainPage.clickLodonList();
-        mainPage.clickMoreLink("Лондон");
+        mainPage = new MainPage(driver);
+        locationPage = new LocationPage(driver);
 
-        String urlParis = "https://yandex.by";
-        mainPage.navigateParis(urlParis);
-        mainPage.clickGeoLink("Париж");
-        mainPage.inputGeoField("Париж");
-        mainPage.clickParisList();
-        mainPage.clickMoreLink("Париж");
+        mainPage.navigate(URL);
 
-        ArrayList<String> moreLinkCityLondon;
-        ArrayList<String> moreLinkCityParis;
+        mainPage.clickGeoLink(City1);
+        locationPage.cityLocationCity1(City1);
+        mainPage.clickMoreLink(City1);
+        moreLinkCity1 = mainPage.getCountMoreLinks(City1);
 
-        mainPage.clickMoreLink("Лондон");
-        moreLinkCityLondon = mainPage.getCountMoreLinks("Лондон");
+        mainPage.clickGeoLink(City2);
+        locationPage.cityLocationCity2(City2);
+        mainPage.clickMoreLink(City2);
+        moreLinkCity2 = mainPage.getCountMoreLinks(City2);
 
-        mainPage.clickMoreLink("Париж");
-        moreLinkCityParis = mainPage.getCountMoreLinks("Париж");
-        for (int i = 0; i < moreLinkCityLondon.size(); i++) {
-            Assert.assertEquals(moreLinkCityLondon.get(i), moreLinkCityParis.get(i));
+
+        for (int i = 0; i < moreLinkCity1.size(); i++) {
+            Assert.assertEquals(moreLinkCity1.get(i), moreLinkCity2.get(i));
 
         }
     }
