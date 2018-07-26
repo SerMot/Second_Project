@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,51 +22,23 @@ public class MainPage {
     @FindBy(css = "a[data-statlog=\"head.region.setup\"] span")
     private WebElement GeoLink;
 
-    @FindBy(css = "input[id=\"city__front-input\"]")
-    private WebElement findLondonField;
-
-    @FindBy(css = "li[data-bem*='\"subtitle\":\"Великобритания\"'] div[class='b-autocomplete-item__reg']")
-    private WebElement findLondonList;
-
     @FindBy(css = "a[data-statlog=\"tabs.more\"]")
     private WebElement findMoreLink;
-
-
-    @FindBy(css = "li[data-bem*='\"subtitle\":\"Франция\"'] div[class='b-autocomplete-item__reg']")
-    private WebElement findParisList;
-
 
     @FindBy(css = "div[class=\"home-tabs__more-item\"] a")
     private List<WebElement> moreLinks;
 
 
-
-    public void navigateLondon(String urlLondon) {
-        driver.get(urlLondon);
-        System.out.println("Переход на:" + urlLondon);
+    public void navigate(String URL) {
+        driver.get(URL);
+        System.out.println("Переход на: "+URL);
     }
 
-    public void navigateParis(String urlParis) {
-        driver.get(urlParis);
-        System.out.println("Переход на:" + urlParis);
-    }
 
-    public void clickGeoLink(String text) {
+        public void clickGeoLink(String text) {
         GeoLink.click();
     }
 
-    public void inputGeoField(String text) {
-        findLondonField.clear();
-        findLondonField.sendKeys(text);
-    }
-
-    public void clickLodonList() {
-        findLondonList.click();
-    }
-
-    public void clickParisList() {
-        findParisList.click();
-    }
 
     public void clickMoreLink(String text) {
         findMoreLink.click();
