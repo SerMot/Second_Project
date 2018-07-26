@@ -14,8 +14,8 @@ public class YandexGeoLocation extends CreateCloseDriver {
     public MainPage mainPage;
     public LocationPage locationPage;
 
-    final String City1 = "Лондон";
-    final String City2 = "Париж";
+    final String CITY1 = "Лондон";
+    final String CITY2 = "Париж";
     final String URL = "https://yandex.by";
 
     @Test
@@ -28,15 +28,16 @@ public class YandexGeoLocation extends CreateCloseDriver {
 
         mainPage.navigate(URL);
 
-        mainPage.clickGeoLink(City1);
-        locationPage.cityLocationCity1(City1);
-        mainPage.clickMoreLink(City1);
-        moreLinkCity1 = mainPage.getCountMoreLinks(City1);
 
-        mainPage.clickGeoLink(City2);
-        locationPage.cityLocationCity2(City2);
-        mainPage.clickMoreLink(City2);
-        moreLinkCity2 = mainPage.getCountMoreLinks(City2);
+        mainPage.clickGeoLink(CITY1);
+        locationPage.cityLocationCity1(CITY1);
+        mainPage.clickMoreLink(CITY1);
+        moreLinkCity1 = mainPage.getCountMoreLinks(CITY1);
+
+        mainPage.clickGeoLink(CITY2);
+        locationPage.cityLocationCity2(CITY2);
+        mainPage.clickMoreLink(CITY2);
+        moreLinkCity2 = mainPage.getCountMoreLinks(CITY2);
 
 
         for (int i = 0; i < moreLinkCity1.size(); i++) {
