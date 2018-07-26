@@ -1,0 +1,41 @@
+package Packages;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class LocationPage {
+    public LocationPage(WebDriver driver) {
+        PageFactory.initElements(driver, this);
+        this.driver = driver;
+    }
+
+    public WebDriver driver;
+
+    @FindBy(css = "input[id=\"city__front-input\"]")
+    private WebElement findCityField;
+
+    @FindBy(css = "button[type='submit']")
+    private WebElement saveCityBtn;
+
+    @FindBy(css = "li[data-bem*='\"subtitle\":\"Великобритания\"'] div[class='b-autocomplete-item__reg']")
+    private WebElement findLondonList;
+
+    @FindBy(css = "li[data-bem*='\"subtitle\":\"Франция\"'] div[class='b-autocomplete-item__reg']")
+    private WebElement findParisList;
+
+    public void cityLocationCity1(String City1) {
+        findCityField.clear();
+        findCityField.sendKeys(City1);
+
+        findLondonList.click();
+    }
+
+    public void cityLocationCity2(String City2) {
+        findCityField.clear();
+        findCityField.sendKeys(City2);
+
+        findParisList.click();
+    }
+}
